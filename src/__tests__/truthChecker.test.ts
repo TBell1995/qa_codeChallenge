@@ -11,15 +11,15 @@ describe("checking for truth", () => {
     }
   });
   test("wordToCheck is a palindrome, case and everything", () => {
-    let wordToCheck = "replace me"; // yeah, replace the value to pass the test.
+    let wordToCheck = "radar"; // yeah, replace the value to pass the test.
     expect(wordToCheck.split("").reverse().join("")).toBe(wordToCheck);
   });
   test("true", () => {
-    let val = null; //set this to a passing value
+    let val = true; //set this to a passing value
     expect(val).toBeTruthy();
   });
   test("there is a sequence to this test", () => {
-    let values: Array<any> = []; // set values here - the array will take any type or combo of types.
+    let values: Array<any> = ["String", true, 1]; // set values here - the array will take any type or combo of types.
     for (let i = 0; i < values.length; i++) {
       if (i == 0) expect(typeof values[i]).toBe("string");
       else if (i == 1) expect(typeof values[i]).toBe("boolean");

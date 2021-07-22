@@ -40,3 +40,37 @@ describe("Employee Manager", () => {
     });
   });
 });
+describe("Challenge 3 tests", () => {
+
+  it("Test 1, can add a new employee", async () => {
+    await em.addEmployee();
+    await em.selectEmployeeByName("New Employee");
+    await em.editEmployee({
+      name: "Dangeruss",
+      phone: "1212121212",
+      title: "QB",
+    });
+    await em.saveChanges();
+    await em.selectEmployeeByName("Dollie Berry");
+    await em.selectEmployeeByName("Dangeruss");
+    let employee = await em.getEmployeeInfo();
+    expect(employee.name).toEqual("Dangeruss");
+    expect(employee.phone).toEqual("1212121212");
+    expect(employee.title).toEqual("QB");
+  });
+  it("Test 2, can cancel an edit", async () => {
+    await em.selectEmployeeByName("Bernice Ortiz");
+    await em.editEmployee({title: "RB"});
+    await em.cancelChanges();
+    let employee = await em.getEmployeeInfo();
+    expect(employee.title).toEqual("CEO");
+  });
+  it("Test 3, can navigate away without saving does not save changes", async () => {
+    await em.selectEmployeeByName("Bernice Ortiz");
+    await em.editEmployee({title: "CFO"});
+    await em.selectEmployeeByName("Dollie Berry");
+    await em.selectEmployeeByName("Bernice Ortiz");
+    let employee = await em.getEmployeeInfo();
+    expect(employee.title).toEqual("CEO");
+  });
+});
